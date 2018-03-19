@@ -1,0 +1,22 @@
+<h3>New Truck - Select Fleet</h3>
+<% if @truck.errors.any? %>
+  <ul>
+    <% @truck.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @truck, local: true do |form| %>
+  <%= form.select :fleet_id, {}, {}, {:class => 'form-control form-control-small'} do %>
+  <% if @selected_fleet.present? %>
+    <option value="<%= @selected_fleet.id %>" selected><%= @selected_fleet.infoname %></option>
+  <% else %>
+    <option value="" selected>Select A Fleet</option>
+  <% end %>
+    <% @fleets.each do |key, value| %>
+      <%= content_tag(:option, key.infoname, value: key.id, id: key.id) %>
+    <% end %>
+  <% end %>
+  <%= form.submit 'Add Truck', :class => 'btn btn-success btn-block' %>
+<%end %>

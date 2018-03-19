@@ -1,0 +1,30 @@
+<h1 class="display-4">Package Tracking ID # <%= @package.tracking_id %></h1>
+<%= form_with model: @package, local: true do |form| %>
+  <p class="package-details">Package Details</p>
+  <dl class="row package-show">
+    <dt class="col-sm-3">Content</dt>
+    <dd class="col-sm-9"><%= @package.content %></dd>
+
+    <dt class="col-sm-3">Weight</dt>
+    <dd class="col-sm-9"><%= @package.weight %></dd>
+
+    <dt class="col-sm-3">Sender Address</dt>
+    <dd class="col-sm-9"><%= @package.sender_address %></dd>
+
+    <dt class="col-sm-3">Receiver Address</dt>
+    <dd class="col-sm-9"><%= @package.receiver_address %></dd>
+
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= form.select :status, Package.statuses.keys.to_a, {}, {:id => 'status',:class => 'form-control form-control-small'} %>
+      </div>
+    </div>
+
+    <div class="hidden">
+      <%= form.hidden_field :latitude, id: "hidden-lat" %>
+      <%= form.hidden_field :longitude, id: "hidden-lng" %>
+    </div>
+  </dl>
+  <div id="map-location"></div>
+  <%= form.submit 'Update Package', :class => 'btn btn-success btn-block' %>
+<% end %>

@@ -1,0 +1,55 @@
+<div class="toolbar">
+  <%= link_to "+ New Package", new_package_path(), class: "btn btn-primary" %>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to "All Packages", packages_path(), class: "btn btn-info" %>
+    <%= link_to "In Warehouse", packages_path(status: 0), class: "btn btn-info" %>
+    <%= link_to "In Transport", packages_path(status: 1), class: "btn btn-info" %>
+    <%= link_to "Delivered", packages_path(status: 2), class: "btn btn-info" %>
+  </div>
+</div>
+<%- @packages.each do |package| %>
+  <div class="card" style="width: 100%;">
+    <div class="row">
+      <div class="col-sm-6">
+        <div id="card-resume" class="card-body">
+          <h5 class="card-title">
+            <%= link_to package_path(package), id: "link-to-package" do %>
+              Tracking ID # <%= package.tracking_id %> - <strong><span class="badge badge-primary"><%= package.status %></span></strong>
+            <% end %>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">Receiver Name: <%= package.receiver_name %></h6>
+          <h6 class="card-subtitle mb-2 text-muted">Receiver Address: <%= package.receiver_address %></h6>
+          <h6 class="card-subtitle mb-2 text-muted">Truck: <%= package.truck.identifier %></h6>
+          <p class="card-text">
+            <dl class="row package-index hidden details-<%= package.id %>">
+              <dt class="col-sm-3">Content</dt>
+              <dd class="col-sm-9"><%= package.content %></dd>
+
+              <dt class="col-sm-3">Weight</dt>
+              <dd class="col-sm-9"><%= package.weight %> Kg</dd>
+
+              <dt class="col-sm-3">Sender Address</dt>
+              <dd class="col-sm-9"><%= package.sender_address %></dd>
+
+              <dt class="col-sm-3">Receiver Address</dt>
+              <dd class="col-sm-9"><%= package.receiver_address %></dd>
+
+              <dt class="col-sm-3">Status</dt>
+              <dd class="col-sm-9"><strong><%= package.status %></strong></dd>
+
+              <div class="hidden">
+                <span id="hidden-lat-<%= package.id %>"><%= package.latitude %></span>
+                <span id="hidden-lng-<%= package.id %>"><%= package.longitude %></span>
+              </div>
+            </dl>
+          </p>
+          <%= link_to 'Toggle Details', '#', onclick: "toggleDetails(event, '#{package.id}');", class: 'btn btn-info btn-sm'%>
+          <%= link_to 'Update Package', edit_package_path(package), class: 'btn btn-success btn-sm'%>
+        </div>
+      </div>
+      <div class="col hidden details-<%= package.id %>">
+        <div class="detail-map" id="map-<%= package.id %>"></div>
+      </div>
+    </div>
+  </div>
+<% end %>

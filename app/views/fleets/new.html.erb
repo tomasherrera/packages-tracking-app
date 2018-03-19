@@ -1,0 +1,21 @@
+<h3>New Fleet - Select State And City</h3>
+<% if @fleet.errors.any? %>
+  <ul>
+    <% @fleet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @fleet, local: true do |form| %>
+  <%= form.select :state, {}, {}, {:id => 'states-of-country',:class => 'form-control form-control-small'} do %>
+  <option value="" selected>Select State</option>
+    <% CS.states(:us).each do |key, value| %>
+      <%= content_tag(:option, value, value: key, id: key) %>
+    <% end %>
+  <% end %>
+  <%= form.select :city, {}, {}, {:id => 'cities-of-state',:class => 'form-control form-control-small'} do %>
+    <option value="" selected>Select City</option>
+  <% end %>
+  <%= form.submit 'Add Fleet', :class => 'btn btn-success btn-block' %>
+<%end %>

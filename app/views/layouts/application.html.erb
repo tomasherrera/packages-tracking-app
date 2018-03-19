@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PackagesTrackingApp</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key='<%= Rails.application.secrets.google_maps_api_key %>'"></script>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <% if admin_signed_in? %>
+      <%= render partial: 'partials/navbar_admins' %>
+    <% else %>
+      <%= render partial: 'partials/navbar_clients' %>
+    <% end %>
+    <div class="container">      
+      <%= yield %>
+    </div>
+    
+  </body>
+</html>

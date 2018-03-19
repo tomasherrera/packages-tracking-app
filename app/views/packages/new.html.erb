@@ -1,0 +1,57 @@
+<h3>New Package</h3>
+<hr />
+<% if @package.errors.any? %>
+  <ul>
+    <% @package.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: @package, local: true do |form| %>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :content %>
+        <%= form.text_field :content, class: 'form-control', placeholder: 'George RR Martin Books' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :weight, "Weight in Kg" %>
+        <%= form.number_field :weight, class: 'form-control', placeholder: '20.5', step: :any%>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :sender_name, "Sender Name"  %>
+        <%= form.text_field :sender_name, class: 'form-control', placeholder: 'Jon Snow' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :sender_address, "Sender Address" %>
+        <%= form.text_field :sender_address, class: 'form-control', placeholder: '2020 Kingsroad Dr, Winterfell, CA' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :receiver_name, "Receiver Name" %>
+        <%= form.text_field :receiver_name, class: 'form-control', placeholder: 'Cersei Lannister' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= form.label :receiver_address, "Receiver Address" %>
+        <%= form.text_field :receiver_address, class: 'form-control', placeholder: '1200 Royal St, Kings Landing, MA', id: "receiver-address"%>
+      </div>
+    </div>  
+  </div>
+  <button type="button" class="btn btn-success btn-block" id="truck-assigning" data-toggle="modal" data-target="#truckAssigning">
+    Assign To Truck
+  </button>
+  <%= render partial: 'partials/truck_assigning', locals: {form: form} %>
+<% end %>

@@ -1,0 +1,45 @@
+// Place all the styles related to the packages controller here#
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+dt, dd {
+  font-size: 16px;
+}
+
+dl.package-index>dt, dd {
+  font-size: 12px;
+}
+
+dl.package-show>dt, dd {
+  font-size: 16px;
+}
+
+.package-details {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+#map, #map-location{
+  height: 400px;
+  width: 100%;
+}
+
+.detail-map{
+  height: 100%;
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#link-to-package , #link-to-package:visited, #link-to-package:hover, #link-to-package:active{
+  color: black !important;
+  text-decoration: none !important;
+  background-color: transparent !important;
+}
